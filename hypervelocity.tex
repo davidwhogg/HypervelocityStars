@@ -1,0 +1,243 @@
+\documentclass[12pt]{article}
+\usepackage{amssymb,amsmath,color,hyperref}
+\definecolor{linkcolor}{rgb}{0,0,0.25}
+\hypersetup{
+  colorlinks=true,        % false: boxed links; true: colored links
+  linkcolor=linkcolor,    % color of internal links
+  citecolor=linkcolor,    % color of links to bibliography
+  filecolor=linkcolor,    % color of file links
+  urlcolor=linkcolor      % color of external links
+}
+\newcommand{\equationname}{equation}
+\newcommand{\documentname}{note}
+\newcommand{\latin}[1]{\emph{#1}}
+\newcommand{\mission}[1]{\textsl{#1}}
+\newcommand{\gaia}{\mission{Gaia}}
+\newcommand{\tvector}[1]{\boldsymbol{\vec{#1}}}
+\newcommand{\vx}{\tvector{x}}
+\newcommand{\vv}{\tvector{v}}
+\newcommand{\va}{\tvector{a}}
+\newcommand{\vvlaunch}{{\vv_{\mathrm{L}}}} % parens for subscripty goodness
+\newcommand{\pvector}[1]{\boldsymbol{#1}}
+\newcommand{\vtheta}{\pvector{\theta}}
+\newcommand{\vomega}{\pvector{\omega}}
+\newcommand{\dd}{\mathrm{d}}
+\newcommand{\flaunch}{f_{\vtheta}}
+\newcommand{\potential}{\Phi_{\vomega}}
+\newcommand{\allN}[1]{\left\{{#1}\right\}_{i=1}^N}
+\newcommand{\allD}{\allN{D_i}}
+\sloppy
+
+\begin{document}
+
+\section*{Dynamical inference from hypervelocity stars}
+
+\noindent
+Hogg, Bovy, Kollmeier, and others
+
+\section{Introduction}
+
+In the action--angle language, it is conventional to do dynamical
+inference with angle-mixed populations.  For example, complete angle
+mixing is the fundamental assumption underlying virial estimators,
+Schwarzschild modeling, and the Oort limit.  Angle-mixed populations
+permit dynamical inference because the angle mixing enforces a strong
+condition on phase space: All informative structure must lie in the
+action subspace; there can be no informative structure in the angle
+subspace.  However, there are many situations of great interest in
+which angles are \emph{not} mixed---or do not even exist---but in
+which we expect dynamical inference to be possible nonetheless.
+Inference does not depend on angle mixing \latin{per se}, it depends
+only on the existence of \emph{some} reliable, predictable, and
+informative structure in phase space.
+
+One example (of many possible choices) is the population of
+\emph{hypervelocity stars}---stars that are moving too quickly to be
+drawn from the tail of the Galaxy's velocity distribution.  If these
+stars were launched onto their hypervelocity orbits by some mechanism
+acting at the Galactic Center, the orbits have this launch point in
+common.  The orbits will have extremely long orbital times (or even be
+unbound), so phase mixing is not even close to valid.  However, the
+fact that all orbits emerge from a common location of tiny volume puts
+structure into phase space on which dynamical inference can hang.
+
+Even if hypervelocity stars are launched by multiple mechanisms and
+even if some of those mechanisms are distributed throughout the disk,
+the formalism developed in this \documentname\ can be used to perform
+dynamical inference; we will make some notes to this effect along the
+way.
+
+\section{Formalism}
+
+Imagine that it is possible to identify stars (indexed by $i$) that
+have been kicked out of the Galactic Center (located at $\vx=0$) at
+high velocity.  Each of these stars was launched some time $t_i$ in
+the past (if now is $t=0$ then $t_i<0$); light-travel time is
+negligible.  Now (at $t=0$) each star $i$ is at a true position $\vx_i$
+and moving at true velocity $\vv_i$, where by ``true'' we mean ``known
+in the limit of vanishing measurement uncertainty''.  The current
+$t=0$ position and velocity $(\vx_i,\vv_i)$ is related to the launch
+$t=t_i$ position and velocity $(0,\vvlaunch_i)$ by
+\begin{eqnarray}\label{eq:xv}\displaystyle
+\vx_i = 0+\int_{t=t_i}^{t=0}\dd t\,\vv(t)
+ &\equiv& \Delta\vx(\vomega,\vvlaunch_i,t_i) \nonumber\\
+\vv_i = \vvlaunch_i+\int_{t=t_i}^{t=0}\dd t\,\va(t)
+ &\equiv& \vvlaunch_i+\Delta\vv(\vomega,t_i) \quad ,
+\end{eqnarray}
+where $\vv(t)$ and $\va(t)$ are the velocity and acceleration
+histories for star $i$ given the (possibly changing, non-trivial)
+gravitational potential $\potential(\vx)$ of the Milky Way, the
+potential $\potential(\vx)$ will be thought of as depending on
+parameters $\vomega$, and the $\Delta\vx$ and $\Delta\vv$ functions
+are defined for future convenience.  These equations are enormously
+over-constrained: Given a potential $\potential(\vx)$, only a
+vanishing subset of possible present-day true positions and velocities
+$(\vx_i,\vv_i)$ are consistent with the initial condition
+$(0,\vvlaunch_i)$ for \emph{any} launch time $t_i$.  Dynamical
+inference is therefore possible.
+
+In any real stellar observation, the radial component of position
+(relative to the Sun) and the transverse components of velocity (again
+relative to the Sun) are badly constrained (or will be until \gaia\ is
+taking data).  For this reason, the incredibly strong condition given
+by \equationname~(\ref{eq:xv}) is not extremely strong for real,
+present-day data sets.  But there is more.
+
+In order to perform inference, we will need a \emph{generative model}
+of the observations.  Imagine that main-sequence stars of
+main-sequence lifetime $T$ are launched with launch velocities
+$\vvlaunch_i$ drawn from a differential rate function
+$\flaunch(\vv,T,t)$ (number per time per three-space velocity element
+per unit lifetime) that depends on parameters $\vtheta$ and does not
+vary strongly with time over the relevant (hypervelocity orbital) time
+scales.  The \emph{distribution} of hypervelocity stars in true
+position and velocity $(\vx_i,\vv_i)$ can be computed directly from
+the launch function $\flaunch(\vv,T,t)$ and the potential
+$\potential(\vx)$.  Here we are not giving the potential any explicit
+time dependence, but nothing in this formalism prohibits it.  We
+\emph{are} giving the launch rate function explicit time dependence,
+because the launch rate will depend on the availability of stars,
+which depends on the star-formation and dynamical histories at the
+Galactic Center.
+
+For main-sequence stars at time $t=0$ (now), the frequency
+distribution of hypervelocity stars ought to be a convolution
+\begin{equation}\label{eq:pvxT}
+p(\vx,\vv,T|\vomega,\vtheta,I) \propto \int \dd t
+ \,\flaunch\left(\vv-\Delta\vv(\vomega,t),T,t\right)
+ \,\delta^3\left(\vx-\Delta\vx(\vomega,\vv,t)\right)\,h(t,T) \quad,
+\end{equation}
+where $I$ represents the underlying or prior assumptions, the integral
+is over all possible launch times, $\delta^3(\vx)$ is the Dirac delta
+function, we have re-written the function $\Delta\vx$ in terms of the
+present-day velocity $\vv$ rather than the launch velocity
+$\vvlaunch$, and the dimensionless factor $h(t,T)$ accounts for finite
+lifetimes, that is, the departure of stars from the main sequence
+while on the hypervelocity orbit; the simplest possible form would be
+\begin{equation}
+h(t,T) = \left\{\begin{array}{cl}\displaystyle
+1&\mbox{for $t+T>0$}\\
+0&\mbox{otherwise}
+\end{array}\right.\quad ;
+\end{equation}
+this expression assumes that launches happen at random times relative
+to stellar birth; this is unlikely, but for some launch mechanisms is
+not a bad approximation for the stars of interest.  We have imagined
+using main-sequence stars to this point just because the factor $h$
+can be simple in this case.  If we use stars with more complicated
+histories, such as blue horizontal-branch stars or red giants, both of
+which are likely to be useful tracers, the factor $h$ becomes a
+function of not just the lifetime of the current state of the star,
+but also of the preceding main-sequence phase.
+
+If the launch mechanism is not point-like at the precise Galactic
+Center, but in fact is distributed throughout the disk or some other
+localized component of the Milky Way, the only change is to replace
+the delta-function $\delta^3(\vx)$ with the relevant
+configuration-space distribution of launch points.  For example, if
+there is a hypervelocity launch mechanism from the disk, the
+delta-function could be replaced with a three-dimensional model of the
+disk, or the launch rate function can obtain a non-trivial spatial
+dependence (dependence on $\vx$).  In general there can be multiple
+mechanisms with different distribution functions in position and
+velocity.  In this case the launch function $\flaunch(\vx,\vv,T,t)$
+gets the positional argument, and its expression will become a mixture
+of distributions, one for each mechanism.
+
+Another possible generalization is to permit the launch mechanism to
+depend strongly on time, as it would, for example, if many stars were
+launched by one or a few large events, such as mergers.  This puts
+launch time $t$ into the arguments of the launch function
+$\flaunch(\vv,T,t)$.  In the limit that all launches happen at a
+single time $t$ in the past, that is, if $\flaunch(\vv,T,t)$ includes
+a delta-function $\delta(t)$, the integral in
+\equationname~(\ref{eq:pvxT}) becomes an evaluation.
+
+With the delta-function at $\vx=0$, the distribution
+function---\equationname~(\ref{eq:pvxT})---is incredibly restrictive
+and informative.  It is non-zero only on a four-dimensional subspace
+of the six-dimensional phase space (three-dimensional if the launch
+function is non-zero only at one or a few delta-functions in time).  A
+data set with well-measured positions and velocities would be
+terrifically constraining on the gravitational potential.  The reality
+is that the radial positions and transverse velocities will probably
+\emph{not} be well measured for the next decade, so we must convolve
+the theoretical prediction with significant observational
+uncertainties.
+
+The most general approach---the one that permits arbitrary error
+propagation, and handles easily missing data, such as stars for which
+there are no measured transverse velocities or very poorly measured
+radial velocities---is to forward-model the data, that is, transform
+the distribution function for the stellar parameters into a
+distribution function for the observed data.  This involves,
+effectively, convolving the predicted distribution
+\begin{equation}\label{eq:pdata}
+p(D_i|\vomega,\vtheta,I) = \int\dd^3\vx_i\,\dd^3\vv_i\,\dd T_i
+ \,p(D_i|\vx_i,\vv_i,T_i)\,p(\vx_i,\vv_i,T_i|\vomega,\vtheta,I) \quad ,
+\end{equation}
+where $D_i$ represents all of the data (astrometry, photometry, and
+spectroscopy) available to constrain the stellar parameters
+$(\vx_i,\vv_i,T_i)$ of star $i$, the integral is over all possible
+true values for the stellar parameters, and $p(D_i|\vx_i,\vv_i,T_i)$
+is a generative model for the observables---the probability
+distribution function for the observables given the stellar
+parameters---evaluated at the observed data.  If this generative model
+of the observables is not available, it is not a bad approximation to
+put in for it the probability distribution function that describes (as
+accurately as possible) the measurement uncertainties on the stellar
+parameters.
+
+Finally, if we assume that $N$ stars $i$ have been drawn independently
+and apply Bayes's theorem, the full posterior probability for the
+parameters becomes
+\begin{equation}
+p\left(\vomega,\vtheta|\allD,I\right)\propto
+ p(\vomega,\vtheta|I)\,\prod_{i=1}^N p(D_i|\vomega,\vtheta,I) \quad,
+\end{equation}
+where the first factor is the prior probability distribution function
+for the parameters in the context of the assumptions.  The
+marginalized posterior probability distribution function for the
+potential parameters $\vomega$ is then
+\begin{equation}
+p\left(\vomega|\allD,I\right)=\int\dd\vtheta
+ \,p\left(\vomega,\vtheta|\allD,I\right) \quad,
+\end{equation}
+where the integral is over the entire space of parameters $\vtheta$
+for the launch rate distribution $\flaunch(\vv,T,t)$.
+
+\section{Parameterization}
+
+Hogg: We made it through all this without yet specifying
+parameterizations for the launch distribution $\flaunch(\vv,T,t)$ or
+the Galaxy potential $\potential(\vx)$.
+
+Hogg: Two options for the launch rate function $\flaunch(\vv,T,t)$:
+some power-law-like thing with no time-dependence, and something
+merger-inspired.
+
+Hogg: For the potential $\potential(\vx)$, some hierarchical thing
+starting with a spherical bulge and halo plus disk but then allowing
+for triaxiality and other craziness.
+
+\end{document}
